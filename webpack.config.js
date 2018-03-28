@@ -21,6 +21,7 @@ if (PRODUCTION) {
   plugins.push(
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
+      sourceMap: true,
     }),
   );
 }
@@ -34,6 +35,7 @@ const config = {
     filename: '[name].js',
     path: join(__dirname, 'dist'),
   },
+  devtool: 'source-map',
   module: {
     rules: [
       {
