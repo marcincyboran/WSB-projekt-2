@@ -5,25 +5,28 @@ export default class EditController extends AddController {
         super($state, myService)
         this.$stateParams = $stateParams;
         this.$scope = $scope;
-        // this.myService = myService;
-        // this.$state = $state;
-        // this.name = '';
-        // this.phone = '';
     }
 
     $onInit() {
         this.id = this.$stateParams.id;
+        // console.log(this.id)
         const contacts = this.myService.contacts;
-        console.log(this.myService);
+        // console.log(this.myService);
         this.index = contacts.map(contact => contact.id).indexOf(this.id);
+
         this.backup = contacts[this.index];
         this.name = contacts[this.index].name;
         this.phone = contacts[this.index].phone;
+        this.company = contacts[this.index].company;
+        this.email = contacts[this.index].email;
+        this.date = contacts[this.index].date;
     }
 
     edit = () => {
         this.myService.contacts[this.index].name = this.name;
         this.myService.contacts[this.index].phone = this.phone;
+        this.myService.contacts[this.index].email = this.email;
+        this.myService.contacts[this.index].company = this.company;
         this.myService.setData();
         this.$state.go('list');
     }
@@ -31,6 +34,8 @@ export default class EditController extends AddController {
     reset = () => {
         this.name = this.backup.name;
         this.phone = this.backup.phone;
+        this.email = this.backup.email;
+        this.company = this.backup.company;
     }
 
     goList = () => {

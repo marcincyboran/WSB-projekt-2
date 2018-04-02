@@ -2,6 +2,8 @@ export default class AddController {
 
     name = '';
     phone = '';
+    company = '';
+    email = '';
 
     constructor ($state, myService) {
         this.$state = $state;
@@ -9,7 +11,12 @@ export default class AddController {
     }
 
     add = () => {
-        this.myService.addContact(this.name,this.phone);
+        this.myService.addContact(
+            this.name,
+            this.phone,
+            this.company,
+            this.email
+        );
         this.$state.go('list');
     }
 
@@ -20,5 +27,7 @@ export default class AddController {
     clear = () => {
         this.name = '';
         this.phone = '';
+        this.company = '';
+        this.email = '';
     }
 }

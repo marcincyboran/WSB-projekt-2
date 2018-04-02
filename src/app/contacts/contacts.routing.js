@@ -17,5 +17,10 @@ export const routing = ($urlRouterProvider, $locationProvider, $stateProvider) =
             name: 'edit',
             url: '/contacts/edit:id',
             component: 'edit'
+        })
+        .state({
+            name: 'details',
+            url: '/contacts/details:id',
+            component: 'detail'
         });
 }

@@ -3,13 +3,22 @@ export default class ListController {
     constructor($state, myService) {
         this.$state = $state;
         this.myService = myService;
-        this.contacts = myService.contacts;
+        this.myService.getList();
+        this.contacts = this.myService.contacts;
+
     };
 
     edit = (id) => {
         this.$state.go('edit', {
-            id: id,
+            id,
         })
+    };
+
+    details = (id) => {
+        this.myService.getCustomerFromId(id);
+        this.$state.go('details', {
+            id,
+        });
     };
 
     delete = (id) => {

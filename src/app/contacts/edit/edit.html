@@ -1,23 +1,42 @@
 <md-card class="edit-card">
+
   <md-card-header>
     <md-card-header-text>
-      <h1 layout="row" layout-align="center center">edit contact</h1>
+      <h1 layout="row" layout-align="center center">Contact created - {{edit.date | date}}</h1>
     </md-card-header-text>
   </md-card-header>
+  
   <md-card-content>
     <form ng-submit="edit.edit()">
+
       <div layout="row" layout-align="center center">
         <md-input-container flex>
           <label>Name</label>
           <input type="text" ng-model="edit.name">
         </md-input-container>
       </div>
+
+      <div layout="row" layout-align="center center">
+        <md-input-container flex>
+          <label>Company</label>
+          <input type="tel" ng-model="edit.company">
+        </md-input-container>
+      </div>
+
+      <div layout="row" layout-align="center center">
+        <md-input-container flex>
+          <label>Email</label>
+          <input type="tel" ng-model="edit.email">
+        </md-input-container>
+      </div>
+
       <div layout="row" layout-align="center center">
         <md-input-container flex>
           <label>Phone</label>
           <input type="tel" ng-model="edit.phone">
         </md-input-container>
       </div>
+
       <div layout="row" layout-align="center center">
         <md-button type="submit" class="md-primary">
           edit contact
