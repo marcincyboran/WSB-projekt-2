@@ -15,12 +15,12 @@ export const routing = ($urlRouterProvider, $locationProvider, $stateProvider) =
         })
         .state({
             name: 'edit',
-            url: '/contacts/edit:id',
+            url: '/contacts/edit/:id',
             component: 'edit'
         })
         .state({
             name: 'details',
-            url: '/contacts/details:id',
+            url: '/contacts/details/:id',
             component: 'detail'
         });
 }

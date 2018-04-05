@@ -1,6 +1,66 @@
-<p>details.customer.name - {{details.customer}}</p>
-<p>details.myService.customerDetails - {{details.myService.customerDetails}}</p>
-<p>details.myService.test - {{details.myService.test}}</p>
-<p>details.test - {{details.test}}</p>
-<p>details.xyz - {{details.xyz}}</p>
-<p>details.myService.test - {{details.myService.test}}</p>
+<md-card>
+    <md-card-header>
+
+        <md-card-avatar-icon>
+            <md-icon class="icon md-accent md-display-1">person</md-icon>
+        </md-card-avatar-icon>
+
+        <md-card-header-text>
+            <span class="md-title">User: {{details.myService.customerDetails.name}}</span>
+            <span class="md-subhead">ID: {{details.myService.customerDetails.id}}</span>
+        </md-card-header-text>
+
+    </md-card-header>
+
+    <md-card-content>
+        <div layout="row" layout-wrap>
+            <div flex="50">
+                <p>Email</p>
+                <md-icon class="icon">email</md-icon>
+                <span>
+                    {{details.myService.customerDetails.email}}
+                </span>
+            </div>
+            <div flex="50">
+                <p>Phone</p>
+                <md-icon class="icon">phone</md-icon>
+                <span>
+                    {{details.myService.customerDetails.phone}}
+                </span>
+            </div>
+            <div flex="50">
+                <p>Work</p>
+                <md-icon class="icon">work</md-icon>
+                <span>
+                    {{details.myService.customerDetails.company}}
+                </span>
+            </div>
+        </div>
+        <div layout="row">
+            <div flex="50">
+                <p>Created</p>
+                <md-icon class="icon">create</md-icon>
+                <span>
+                    {{details.myService.customerDetails.date | date:"dd.MM.y - HH:mm"}}
+                </span>
+            </div>
+            <div flex="50">
+                <p>Last edit</p>
+                <md-icon class="icon">schedule</md-icon>
+                <span>
+                    {{details.myService.customerDetails.editDate ? details.myService.customerDetails.editDate : 'Not yet edited' | date:"dd.MM.y - HH:mm"}}
+                </span>
+            </div>
+        </div>
+    </md-card-content>
+
+    <md-card-actions layout="row" layout-align="center center">
+        <md-button class="md-warn" ng-click="details.back()">
+            <md-icon>reply</md-icon>
+        </md-button>
+        <md-button class="md-warn" ng-click="details.edit()">
+                <md-icon>edit</md-icon>
+            </md-button>
+    </md-card-actions>
+
+</md-card>

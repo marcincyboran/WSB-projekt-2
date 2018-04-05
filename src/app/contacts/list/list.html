@@ -1,13 +1,13 @@
 <md-list>
-  <md-list-item ng-repeat="contact in list.contacts | orderBy:'name' track by $index ">
+  <md-list-item ng-repeat="contact in list.myService.contacts | orderBy:'name' track by $index " class="md-2-line">
 
-    <div class="avatar">
-      <md-icon class="icon md-accent">person</md-icon>
+    <div class="md-avatar">
+      <md-icon class="icon md-accent md-display-1">person</md-icon>
     </div>
 
-    <div class="md-list-item-text">
+    <div class="md-list-item-text" layout="column">
       <h3>{{contact.name}}</h3>
-      <p>{{contact.phone}}</p>
+      <p>{{contact.company}}</p>
     </div>
 
     <md-menu class="md-secondary">
@@ -20,18 +20,20 @@
       <md-menu-content width="4">
 
         <md-menu-item>
+          <md-button class="md-primary" ng-click="list.details(contact.id)">
+            <md-icon>info</md-icon>
+            Details
+          </md-button>
+        </md-menu-item>
+
+        <md-menu-divider></md-menu-divider>
+
+        <md-menu-item>
           <md-button class="md-accent" ng-click="list.edit(contact.id)">
             <md-icon>edit</md-icon>
             Edit
           </md-button>
         </md-menu-item>
-
-        <md-menu-item>
-            <md-button class="md-accent" ng-click="list.details(contact.id)">
-              <md-icon></md-icon>
-              Details
-            </md-button>
-          </md-menu-item>
 
         <md-menu-divider></md-menu-divider>
 

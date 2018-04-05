@@ -1,0 +1,16 @@
+md-card {
+    box-shadow: 2px 2px 8px #666 !important
+}
+
+md-card-header-text {
+    margin-left: 20px;
+    border-bottom: 1px solid #666;
+}
+
+md-card-content > div > div {
+    margin-bottom: 20px;
+
+    md-icon {
+        margin-right: 10px;
+    }
+}

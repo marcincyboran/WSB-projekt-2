@@ -3,9 +3,6 @@ export default class ListController {
     constructor($state, myService) {
         this.$state = $state;
         this.myService = myService;
-        this.myService.getList();
-        this.contacts = this.myService.contacts;
-
     };
 
     edit = (id) => {

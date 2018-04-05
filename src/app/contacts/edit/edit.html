@@ -2,51 +2,68 @@
 
   <md-card-header>
     <md-card-header-text>
-      <h1 layout="row" layout-align="center center">Contact created - {{edit.date | date}}</h1>
+      <h1 layout="row" layout-align="center center">Last edit - {{edit.editDate ? edit.editDate : 'Not yet edited' | date:"dd.MM.y - HH:mm"}}</h1>
     </md-card-header-text>
   </md-card-header>
-  
+
   <md-card-content>
-    <form ng-submit="edit.edit()">
+    <form ng-submit="edit.edit()" name="editForm">
 
-      <div layout="row" layout-align="center center">
-        <md-input-container flex>
+      <div layout="row" layout-align="space-around center">
+        <md-input-container flex="35">
           <label>Name</label>
-          <input type="text" ng-model="edit.name">
+          <input type="text" ng-model="edit.name" name="name" md-maxlength="30" required>
+          <div ng-messages="editForm.name.$error">
+            <div ng-message="required">Name is required</div>
+            <div ng-message="md-maxlength">No more then 30 characters</div>
+          </div>
         </md-input-container>
-      </div>
 
-      <div layout="row" layout-align="center center">
-        <md-input-container flex>
-          <label>Company</label>
-          <input type="tel" ng-model="edit.company">
-        </md-input-container>
-      </div>
-
-      <div layout="row" layout-align="center center">
-        <md-input-container flex>
+        <md-input-container flex="35">
           <label>Email</label>
-          <input type="tel" ng-model="edit.email">
+          <input type="email" ng-model="edit.email" name="email" maxlength="20" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/"
+            required>
+          <div ng-messages="editForm.email.$error">
+            <div ng-message="required">Email is required</div>
+            <div ng-message="pattern">This must be a email</div>
+          </div>
         </md-input-container>
       </div>
 
-      <div layout="row" layout-align="center center">
-        <md-input-container flex>
+      <div layout="row" layout-align="space-around center">
+        <md-input-container flex="35">
+          <label>Company</label>
+          <input type="text" ng-model="edit.company" name="company" md-maxlength="30" required>
+          <div ng-messages="editForm.company.$error">
+            <div ng-message="required">Company is required</div>
+            <div ng-message="md-maxlength">No more then 30 characters</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container flex="35">
           <label>Phone</label>
-          <input type="tel" ng-model="edit.phone">
+          <input type="text" ng-model="edit.phone" name="phone" ng-pattern="/^[0-9]{9}$/" required>
+          <div ng-messages="editForm.phone.$error">
+            <div ng-message="required">Phone number is required</div>
+            <div ng-message="pattern">Numbers like 444555666</div>
+          </div>
         </md-input-container>
       </div>
 
       <div layout="row" layout-align="center center">
-        <md-button type="submit" class="md-primary">
-          edit contact
+
+        <md-button type="submit" class="md-primary" ng-disabled="editForm.$invalid">
+          edit customer
         </md-button>
-        <md-button class="md-accent" ng-click="edit.reset()">
+
+        <md-button class="md-accent" ng-click="edit.reset()" ng-disabled="editForm.$dirty">
           reset
         </md-button>
+
         <md-button type="reset" class="md-warn" ng-click="edit.goBack()">
-          go back
+          Full list
         </md-button>
+
       </div>
     </form>
   </md-card-content>

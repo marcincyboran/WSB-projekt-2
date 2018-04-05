@@ -7,34 +7,18 @@ export class ContactsService {
         'Access-Control-Allow-Origin': '*',
         'X-User-ID': 'test'
     });
+    URL = 'https://wsb-frontend-project-angularjs.juszczak.io';
     contacts = [];
     customerDetails = [];
 
     constructor($state) {
         this.$state = $state;
+        this.getList();
     };
-
-    // dunno why but need this to reload this.contacts, and refresh html view
-
-    // update = (data) => {
-    //     data.forEach(element => {
-    //         this.contacts.push(element);
-    //     });
-    //     this.$state.go('list');
-    // };
-
-    // updateCustomerDetails = (data) => {
-    //     this.customerDetails = [];
-    //     this.customerDetails.push(data);
-    // };
-
-    // returnContacts = () => {
-    //     return this.contacts;
-    // };
 
     setCustomer = (customer) => {
 
-        fetch('https://wsb-frontend-project-angularjs.juszczak.io/add', {
+        fetch(this.URL + '/add', {
             method: 'post',
             headers: this.HEADERS,
             body: JSON.stringify({ customer: customer })
@@ -75,10 +59,10 @@ export class ContactsService {
                 }
             })
             .then(response => {
-                console.log('getList data:')
-                console.log(response);
                 this.contacts = response.customers;
-                // this.$state.reload();
+
+                // refresh list
+                this.$state.go('list');
             })
             .catch(errorObj => {
                 console.log(errorObj);
@@ -87,7 +71,7 @@ export class ContactsService {
 
     getCustomerFromId = (id) => {
 
-        fetch('https://wsb-frontend-project-angularjs.juszczak.io/customer/' + id, {
+        fetch(this.URL + '/customer/' + id, {
             method: 'get',
             headers: this.HEADERS
         })
@@ -104,20 +88,23 @@ export class ContactsService {
             .then(response => {
                 console.log('getCustomer data:')
                 console.log(response);
-                // this.updateCustomerDetails(response.customer);
-                this.customerDetails = [];
-                this.customerDetails.push(response.customer);
+
+                this.customerDetails = response.customer;
+                this.$state.go('details', {
+                    id,
+                });
             })
             .catch(errorObj => {
                 console.log(errorObj);
             });
     };
 
-    updateCustomer = (id) => {
+    updateCustomer = (customerObj) => {
 
-        fetch('https://wsb-frontend-project-angularjs.juszczak.io/update/' + id, {
+        fetch(this.URL + '/update/' + customerObj.id, {
             method: 'put',
-            headers: this.HEADERS
+            headers: this.HEADERS,
+            body: JSON.stringify({ customer: customerObj })
         })
             .then(response => {
                 if (response.ok) {
@@ -140,7 +127,7 @@ export class ContactsService {
 
     deleteCustomer = (id) => {
 
-        fetch('https://wsb-frontend-project-angularjs.juszczak.io/delete/' + id, {
+        fetch(this.URL + '/delete/' + id, {
             method: 'delete',
             headers: this.HEADERS
         })
@@ -179,6 +166,6 @@ export class ContactsService {
     deleteContact = (id) => {
         const index = this.contacts.map(contact => contact.id).indexOf(id);
         this.contacts.splice(index, 1);
-        this.setData();
+        this.deleteCustomer(id);
     };
 }

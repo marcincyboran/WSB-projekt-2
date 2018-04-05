@@ -8,10 +8,10 @@ export default class EditController extends AddController {
     }
 
     $onInit() {
+        this.textarea = '';
+
         this.id = this.$stateParams.id;
-        // console.log(this.id)
         const contacts = this.myService.contacts;
-        // console.log(this.myService);
         this.index = contacts.map(contact => contact.id).indexOf(this.id);
 
         this.backup = contacts[this.index];
@@ -19,15 +19,26 @@ export default class EditController extends AddController {
         this.phone = contacts[this.index].phone;
         this.company = contacts[this.index].company;
         this.email = contacts[this.index].email;
-        this.date = contacts[this.index].date;
+        this.editDate = contacts[this.index].editDate;
     }
 
     edit = () => {
+        const editDate = new Date();
         this.myService.contacts[this.index].name = this.name;
         this.myService.contacts[this.index].phone = this.phone;
         this.myService.contacts[this.index].email = this.email;
         this.myService.contacts[this.index].company = this.company;
-        this.myService.setData();
+        this.myService.contacts[this.index].editDate = editDate;
+
+        const customer = {
+            id: this.id,
+            name: this.name,
+            phone: this.phone,
+            company: this.company,
+            editDate: editDate
+        };
+
+        this.myService.updateCustomer(customer);
         this.$state.go('list');
     }
 

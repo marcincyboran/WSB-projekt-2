@@ -5,41 +5,57 @@
     </md-card-header-text>
   </md-card-header>
   <md-card-content>
-    <form ng-submit="add.add()">
+    <form ng-submit="add.add()" name="addForm">
 
       <div layout="row" layout-align="center center">
         <md-input-container flex>
           <label>Name</label>
-          <input type="text" ng-model="add.name">
+          <input type="text" ng-model="add.name" name="name" md-maxlength="30" required>
+          <div ng-messages="addForm.name.$error">
+            <div ng-message="required">Name is required</div>
+            <div ng-message="md-maxlength">No more then 30 characters</div>     
+          </div>
         </md-input-container>
       </div>
 
       <div layout="row" layout-align="center center">
         <md-input-container flex>
           <label>Company</label>
-          <input type="text" ng-model="add.company">
+          <input type="text" ng-model="add.company" name="company" md-maxlength="30" required>
+          <div ng-messages="addForm.company.$error">
+            <div ng-message="required">Company is required</div>
+            <div ng-message="md-maxlength">No more then 30 characters</div>            
+          </div>
         </md-input-container>
       </div>
 
       <div layout="row" layout-align="center center">
         <md-input-container flex>
           <label>Email @</label>
-          <input type="text" ng-model="add.email">
+          <input type="text" ng-model="add.email" name="email" maxlength="20" ng-pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" required >
+          <div ng-messages="addForm.email.$error">
+            <div ng-message="required">Email is required</div>
+            <div ng-message="pattern">This must be a email</div>
+          </div>
         </md-input-container>
       </div>
 
       <div layout="row" layout-align="center center">
         <md-input-container flex>
           <label>Phone</label>
-          <input type="text" ng-model="add.phone">
+          <input type="text" ng-model="add.phone" name="phone" ng-pattern="/^[0-9]{9}$/" required>
+          <div ng-messages="addForm.phone.$error">
+            <div ng-message="required">Phone number is required</div>
+            <div ng-message="pattern">Numbers like 444555666</div>            
+          </div>
         </md-input-container>
       </div>
 
       <div layout="row" layout-align="center center">
-        <md-button type="submit" class="md-primary">
+        <md-button type="submit" class="md-primary" ng-disabled="addForm.$invalid">
           add contact
         </md-button>
-        <md-button type="reset" class="md-accent" ng-click="add.clear()">
+        <md-button type="reset" class="md-accent" ng-click="add.clear()" ng-disabled="addForm.$pristine">
           clear
         </md-button>
         <md-button type="reset" class="md-warn" ng-click="add.goBack()">
