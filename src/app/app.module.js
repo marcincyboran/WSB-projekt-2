@@ -10,7 +10,10 @@ import {AppComponent} from './app.component';
 import {contactsModule} from './contacts/contacts.module';
 
 const materialConfig = $mdThemingProvider => {
-  $mdThemingProvider.theme('default');
+  $mdThemingProvider.theme('default')
+  .primaryPalette('orange')
+  .accentPalette('blue')
+  .warnPalette('deep-orange');
 };
 
 export const appModule = angular

@@ -21,7 +21,7 @@ if (PRODUCTION) {
   plugins.push(
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
-      sourceMap: true,
+      sourceMap: true
     }),
   );
 }
